@@ -1,20 +1,79 @@
 "use client";
 
-export const FormTextArea = () => {
-  return (
-    <div className="flex flex-col">
-      <label
-        htmlFor="description"
-        className="text-sm font-medium text-gray-700"
-      >
-        Description
-      </label>
-      <textarea
-        id="description"
-        name="description"
-        rows={3}
-        className="mt-1 block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm border-gray-300 rounded-md"
-      ></textarea>
-    </div>
-  );
-};
+import { useFormStatus } from "react-dom";
+import { forwardRef, KeyboardEventHandler } from "react";
+
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { cn } from "@/lib/utils";
+import { FormErrors } from "./form-errors";
+
+interface FormTextAreaProps {
+  id: string;
+  label?: string;
+  placeholder?: string;
+  required?: boolean;
+  disabled?: boolean;
+  errors?: Record<string, string[] | undefined>;
+  className?: string;
+  onBlur?: () => void;
+  onClick: () => void;
+  onKeyDown?: KeyboardEventHandler<HTMLTextAreaElement> | undefined;
+  defaultValue?: string;
+}
+
+export const FormTextarea = forwardRef<HTMLTextAreaElement, FormTextAreaProps>(
+  (
+    {
+      id,
+      label,
+      placeholder,
+      required,
+      disabled,
+      errors,
+      className,
+      onBlur,
+      onClick,
+      onKeyDown,
+      defaultValue,
+    },
+    ref
+  ) => {
+    const { pending } = useFormStatus();
+
+    return (
+      <div className="space-y-2 w-full">
+        <div className="space-y-1 w-full">
+          {label ? (
+            <Label
+              htmlFor={id}
+              className="text-xs font-semibold text-neutral-700"
+            >
+              {label}
+            </Label>
+          ) : null}
+          <Textarea
+            onKeyDown={onKeyDown}
+            ref={ref}
+            id={id}
+            placeholder={placeholder}
+            required={required}
+            disabled={pending || disabled}
+            className={cn(
+              " resize-none focus-visible:ring-0 focus-visible:ring-offset-0 ring-0 focus:ring-0 outline-none shadow-sm",
+              className
+            )}
+            onBlur={onBlur}
+            onClick={onClick}
+            defaultValue={defaultValue}
+            name={id}
+            aria-describedby={`${id}-error`}
+          />
+        </div>
+        <FormErrors id={id} errors={errors} />
+      </div>
+    );
+  }
+);
+
+FormTextarea.displayName = "FormTextarea";
