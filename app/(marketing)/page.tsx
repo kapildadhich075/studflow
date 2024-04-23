@@ -49,7 +49,7 @@ const MarketingPage = () => {
         unique—accomplish it all with StudFlow.
       </div>
       <Button className="mt-6" size={"lg"} asChild>
-        <Link href="/sign-up">Get Studflow for free</Link>
+        <Link href="/sign-up">Get Studflow</Link>
       </Button>
     </div>
   );

@@ -50,13 +50,13 @@ export const BoardList = async () => {
             hover:opacity-75 transition "
             >
               <p className="text-sm">Create New Board</p>
-              <Hint
+              {/* <Hint
                 description="
                 Free users can create up to 5 boards. Upgrade to create more.
             "
               >
                 <HelpCircle className=" absolute bottom-2 right-2 h-[14px] w-[14px]" />
-              </Hint>
+              </Hint> */}
             </div>
           </FormPopover>
         </div>
