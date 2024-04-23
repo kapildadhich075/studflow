@@ -50,7 +50,6 @@ export const BoardList = async () => {
             hover:opacity-75 transition "
             >
               <p className="text-sm">Create New Board</p>
-              <span className="text-xs">5 Remaining</span>
               <Hint
                 description="
                 Free users can create up to 5 boards. Upgrade to create more.
