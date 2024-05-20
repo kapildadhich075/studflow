@@ -1,6 +1,8 @@
 "use client";
 
 import { forwardRef } from "react";
+import { ClipLoader } from "react-spinners";
+
 import { useFormStatus } from "react-dom";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
@@ -67,6 +69,11 @@ export const FormInput = forwardRef<HTMLInputElement, FormInputProps>(
             />
           </div>
           <FormErrors errors={errors} id={id} />
+          {pending && (
+            <div className="flex justify-center items-center">
+              <ClipLoader size={24} color="#000" />
+            </div>
+          )}
         </div>
       </>
     );
