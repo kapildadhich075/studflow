@@ -85,7 +85,7 @@ export const ListHeader = ({ data, onAddCard }: ListHeaderProps) => {
         ) : (
           <div
             onClick={enableEditing}
-            className="w-full text-sm px-2.5 py-2 h-7 font-medium border-transparent"
+            className="w-full text-sm px-2.5 py-2 h-7 font-medium border-transparent text-clip"
           >
             {title}
           </div>

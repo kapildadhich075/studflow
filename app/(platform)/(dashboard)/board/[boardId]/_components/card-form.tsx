@@ -1,7 +1,7 @@
 "use client";
 
 import { forwardRef, ElementRef, KeyboardEventHandler, useRef } from "react";
-import { Plus, X } from "lucide-react";
+import { Image, Plus, X } from "lucide-react";
 import { toast } from "sonner";
 import { useParams } from "next/navigation";
 
@@ -83,6 +83,9 @@ export const CardForm = forwardRef<HTMLTextAreaElement, CardFormProps>(
           <input hidden id="listId" name="listId" value={listId} />
           <div className="flex items-center gap-x-1">
             <FormSubmit>Add Card</FormSubmit>
+            <Button size={"sm"} variant={"link"}>
+              <Image className="h-4 w-4" />
+            </Button>
             <Button onClick={disableEditing} size={"sm"} variant={"ghost"}>
               <X className="h-4 w-4" />
             </Button>
