@@ -2,6 +2,7 @@
 
 import { useFormStatus } from "react-dom";
 import { forwardRef, KeyboardEventHandler } from "react";
+import { ClipLoader } from "react-spinners";
 
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
@@ -71,6 +72,11 @@ export const FormTextarea = forwardRef<HTMLTextAreaElement, FormTextAreaProps>(
           />
         </div>
         <FormErrors id={id} errors={errors} />
+        {pending && (
+          <div className="flex items-center justify-center">
+            <ClipLoader size={16} color="#008080" />
+          </div>
+        )}
       </div>
     );
   }
