@@ -16,6 +16,7 @@ import { FormSubmit } from "./form-submit";
 import { Button } from "@/components/ui/button";
 import { FormPicker } from "./form-picker";
 import { ElementRef, useRef } from "react";
+import { useProModal } from "@/hooks/use-pro-modal";
 import { useRouter } from "next/navigation";
 
 interface FormPopoverProps {
@@ -31,6 +32,7 @@ export const FormPopover = ({
   align,
   sideOffset = 0,
 }: FormPopoverProps) => {
+  const proModal = useProModal();
   const router = useRouter();
   const closeRef = useRef<ElementRef<"button">>(null);
   const { execute, fieldErrors } = useAction(createBoard, {
@@ -40,7 +42,10 @@ export const FormPopover = ({
       router.push(`/board/${data.id}`);
     },
     onError: (error) => {
-      toast.error("Error creating board");
+      toast.error(
+        "Failed to create board, You have reached the maximum number of boards. Upgrade your plan to create more boards."
+      );
+      proModal.onOpen();
     },
   });
 
