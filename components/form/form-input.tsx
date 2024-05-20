@@ -71,7 +71,7 @@ export const FormInput = forwardRef<HTMLInputElement, FormInputProps>(
           <FormErrors errors={errors} id={id} />
           {pending && (
             <div className="flex justify-center items-center">
-              <ClipLoader size={24} color="#000" />
+              <ClipLoader size={24} color="#008080" />
             </div>
           )}
         </div>
