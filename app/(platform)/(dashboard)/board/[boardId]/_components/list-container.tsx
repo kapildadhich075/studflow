@@ -145,23 +145,26 @@ export const ListContainer = ({ data, boardId }: ListContainerProps) => {
   };
 
   return (
-    <DragDropContext onDragEnd={onDragEnd}>
-      <Droppable droppableId="lists" type="list" direction={"horizontal"}>
-        {(provided) => (
-          <ol
-            {...provided.droppableProps}
-            ref={provided.innerRef}
-            className="flex gap-x-3 h-full"
-          >
-            {orderData.map((list, index) => (
-              <ListItem key={list.id} list={list} index={index} />
-            ))}
-            {provided.placeholder}
-            <ListForm />
-            <div className=" flex-shrink-0 w-1" />
-          </ol>
-        )}
-      </Droppable>
-    </DragDropContext>
+    <>
+      <DragDropContext onDragEnd={onDragEnd}>
+        <Droppable droppableId="lists" type="list" direction={"horizontal"}>
+          {(provided) => (
+            <ol
+              {...provided.droppableProps}
+              ref={provided.innerRef}
+              className="flex gap-x-3 h-full"
+              id="board"
+            >
+              {orderData.map((list, index) => (
+                <ListItem key={list.id} list={list} index={index} />
+              ))}
+              {provided.placeholder}
+              <ListForm />
+              <div className=" flex-shrink-0 w-1" />
+            </ol>
+          )}
+        </Droppable>
+      </DragDropContext>
+    </>
   );
 };
