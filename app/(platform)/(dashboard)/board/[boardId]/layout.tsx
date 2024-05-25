@@ -53,6 +53,7 @@ const BoardIdLayout = async ({
   if (!board) {
     notFound();
   }
+
   return (
     <>
       <div
@@ -62,7 +63,7 @@ const BoardIdLayout = async ({
         }}
       >
         <div className=" absolute inset-0 bg-black/10" />
-        <BoardNavbar data={board} />
+        <BoardNavbar data={board} id={"board"} />
         <main className="relative pt-28 h-full">{children}</main>
       </div>
     </>

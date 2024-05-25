@@ -3,12 +3,16 @@ import { auth } from "@clerk/nextjs";
 import { Board } from "@prisma/client";
 import { BoardTitleForm } from "./board-title-form";
 import BoardOptions from "./board-options";
+import { Button } from "@/components/ui/button";
+import { Image as Screenshot } from "lucide-react";
+import html2canvas from "html2canvas";
 
 interface BoardNavbarProps {
   data: Board;
+  id: string;
 }
 
-const BoardNavbar = async ({ data }: BoardNavbarProps) => {
+const BoardNavbar = async ({ data, id }: BoardNavbarProps) => {
   const { orgId } = auth();
 
   return (
@@ -18,8 +22,8 @@ const BoardNavbar = async ({ data }: BoardNavbarProps) => {
       px-6 gap-x-4 text-white"
       >
         <BoardTitleForm data={data} />
-        <div className=" ml-auto">
-          <BoardOptions id={data.id} />
+        <div className="ml-auto">
+          <BoardOptions id={data.id} screenShotId={id} />
         </div>
       </div>
     </>
