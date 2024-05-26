@@ -14,6 +14,8 @@ import {
   decreaseAvailableCount,
 } from "@/lib/org-limit";
 
+import { checkSubscription } from "@/lib/subscription";
+
 const handler = async (data: InputType): Promise<ReturnType> => {
   const { userId, orgId } = auth();
 
@@ -24,10 +26,9 @@ const handler = async (data: InputType): Promise<ReturnType> => {
   }
 
   const canCreate = await hasAvailableCount();
+  const isPro = await checkSubscription();
 
-  console.log("canCreate", canCreate);
-
-  if (!canCreate) {
+  if (!canCreate && !isPro) {
     return {
       error:
         "You have reached the maximum number of boards. Upgrade your plan to create more boards.",
@@ -66,7 +67,9 @@ const handler = async (data: InputType): Promise<ReturnType> => {
       },
     });
 
-    await incrementAvailableCount();
+    if (!isPro) {
+      await incrementAvailableCount();
+    }
 
     await createAuditLog({
       entityId: board.id,
