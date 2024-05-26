@@ -1,1 +1,1 @@
-export const MAX_FREE_BOARDS = 6;
+export const MAX_FREE_BOARDS = 5;

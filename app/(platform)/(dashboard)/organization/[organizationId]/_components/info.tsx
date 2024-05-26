@@ -1,13 +1,17 @@
 "use client";
 
-import { Timer } from "lucide-react";
+import { CreditCard, Timer } from "lucide-react";
 
 import { useOrganization } from "@clerk/nextjs";
 import Image from "next/image";
 import { Skeleton } from "@/components/ui/skeleton";
 import { format } from "date-fns";
 
-export const Info = () => {
+interface InfoProps {
+  isPro: boolean;
+}
+
+export const Info = ({ isPro }: InfoProps) => {
   const { organization, isLoaded } = useOrganization();
 
   if (!isLoaded) {
@@ -31,13 +35,8 @@ export const Info = () => {
         <div className="space-y-1">
           <p className="fonr-semibold text-xl">{organization?.name}</p>
           <div className="flex items-center text-xs text-muted-foreground">
-            <Timer className="h-4 w-4 mr-1" />
-            <span>
-              {format(
-                new Date(organization?.createdAt!),
-                "MMM d, yyyy 'at' h:mm a"
-              )}
-            </span>
+            <CreditCard className="h-3 w-3 mr-1" />
+            {isPro ? "Pro Plan" : "Free Plan"}
           </div>
         </div>
       </div>
